@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/KH-QuotationList/static/css/main.e03661ad.css",
+    "main.js": "/KH-QuotationList/static/js/main.962c5082.js",
+    "static/media/logo.png": "/KH-QuotationList/static/media/logo.a80f59c252cea803634f.png",
+    "index.html": "/KH-QuotationList/index.html",
+    "main.e03661ad.css.map": "/KH-QuotationList/static/css/main.e03661ad.css.map",
+    "main.962c5082.js.map": "/KH-QuotationList/static/js/main.962c5082.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e03661ad.css",
+    "static/js/main.962c5082.js"
+  ]
+}
