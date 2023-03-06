@@ -8,6 +8,24 @@ import bootstrap from "bootstrap"; // eslint-disable-line no-unused-vars
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyAwKnWWyWHPOYwehaL-paX7KPOLHdomH6s",
+  authDomain: "kh-curtains.firebaseapp.com",
+  projectId: "kh-curtains",
+  storageBucket: "kh-curtains.appspot.com",
+  messagingSenderId: "88547459846",
+  appId: "1:88547459846:web:99c15fd9dfa6c44ef19487",
+};
+
+// Initialize Firebase
+initializeApp(firebaseConfig);
+
 function App() {
   const [showSummary, setShowSummary] = React.useState(false);
   return showSummary ? (

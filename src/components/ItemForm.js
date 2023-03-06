@@ -1,4 +1,5 @@
 import * as React from "react";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function Editor({ data = {}, onChange = () => {} }) {
   const [formData, setData] = React.useState(data);
@@ -7,7 +8,7 @@ export default function Editor({ data = {}, onChange = () => {} }) {
   const onChangeField = (field, value) => {
     const updatedData = {
       ...formData,
-      [field]: value
+      [field]: value,
     };
     setData(updatedData);
     onChange(updatedData);
@@ -17,20 +18,19 @@ export default function Editor({ data = {}, onChange = () => {} }) {
   }, []);
 
   const loadFile = (event) => {
-    const reader = new FileReader();
     const file = event.target.files[0];
-    reader.addEventListener(
-      "load",
-      () => {
-        // convert image file to base64 string
-        onChangeField("image", reader.result);
-      },
-      false
-    );
+    const name = +new Date() + "-" + file.name;
+    const metadata = {
+      contentType: file.type,
+    };
 
-    if (file) {
-      reader.readAsDataURL(file);
-    }
+    const storage = getStorage();
+    const storageRef = ref(storage, name);
+    uploadBytes(storageRef, file, metadata).then(async (snapshot) => {
+      const url = await getDownloadURL(snapshot.ref);
+      onChangeField("image", url);
+      console.log("Uploaded a", url);
+    });
   };
   return (
     <form>
