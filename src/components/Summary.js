@@ -2,12 +2,12 @@ import logoImage from "../assets/logo.png";
 
 function VR() {
   return (
-    <div className="col-sm-auto gx-0">
+    <div className="col-auto gx-0">
       <div
         className="vr"
         style={{
           height: "100%",
-          width: "1px"
+          width: "1px",
         }}
       ></div>
     </div>
@@ -18,7 +18,7 @@ function Divider() {
   return (
     <hr
       style={{
-        margin: 0
+        margin: 0,
       }}
     />
   );
@@ -31,7 +31,7 @@ const COLS = [
   "HSN/SAC",
   "QTY",
   "Rate",
-  "Amount"
+  "Amount",
 ];
 
 const COLS_SIZES = {
@@ -41,13 +41,13 @@ const COLS_SIZES = {
   "HSN/SAC": 1,
   QTY: 0.5,
   Rate: 0.5,
-  Amount: 0.5
+  Amount: 0.5,
 };
 
 const to2DecimalPlaces = (numberOrString) => {
   const numberFormatter = Intl.NumberFormat("en-IN", {
     style: "currency",
-    currency: "INR"
+    currency: "INR",
   });
   return numberFormatter.format(numberOrString);
 };
@@ -55,7 +55,7 @@ const to2DecimalPlaces = (numberOrString) => {
 export default function Summary({
   name = "Client Name",
   quotationNumber = 0,
-  quotationDate = new Date()
+  quotationDate = new Date(),
 }) {
   const localDataString = window.localStorage.getItem("KH_data");
   const data = JSON.parse(localDataString || "[]");
@@ -68,8 +68,8 @@ export default function Summary({
   }, 0);
 
   return (
-    <div className="container-fluid main-container">
-      <div className="black-border-container">
+    <div className="main-container">
+      <div className="container-fluid black-border-container">
         <div className="row">
           <div className="col-4 ">
             <div className="d-flex align-items-center justify-content-center flex-column h-100">
@@ -84,7 +84,7 @@ export default function Summary({
                 className="h2 fw-bold"
                 style={{
                   backgroundColor: "#f9a927",
-                  color: "#058492"
+                  color: "#058492",
                 }}
               >
                 KAUSHAL HOMES
@@ -103,7 +103,7 @@ export default function Summary({
           </div>
         </div>
         <Divider />
-        <div className="row">
+        <div className="row gx-0">
           <div className="col ms-2 ">
             To, <span className="h6 fw-bold">{clientData.name}</span>
             <div className="ms-4">
@@ -112,7 +112,7 @@ export default function Summary({
             </div>
           </div>
           <VR />
-          <div className="col-4 gx-0">
+          <div className="col-4">
             <div className="row text-center">
               <p>Quotation Number </p>
               <strong>
@@ -121,7 +121,7 @@ export default function Summary({
             </div>
             <hr
               style={{
-                margin: 0
+                margin: 0,
               }}
             />
             <div className="row text-center">
@@ -153,7 +153,7 @@ export default function Summary({
                   style={{
                     width: `${COLS_SIZES[column] * 10}%`,
                     wordWrap: "break-word",
-                    maxWidth: `${COLS_SIZES[column] * 10}%`
+                    maxWidth: `${COLS_SIZES[column] * 10}%`,
                   }}
                 >
                   {column}
@@ -169,19 +169,19 @@ export default function Summary({
                   <td className="text-start">
                     {description
                       ? description.split("\n").map((line, index) => {
-                          if (line.startsWith("H1-")) {
+                          if (line.startsWith("HH ")) {
                             return (
                               <div className="fw-bold h6" key={index + line}>
-                                {line.replace(/H1-/, "")}
+                                {line.replace(/HH /, "")}
                               </div>
                             );
-                          } else if (line.startsWith("B-")) {
+                          } else if (line.startsWith("BB ")) {
                             return (
                               <div
                                 key={index + line}
                                 className="fw-semibold fst-italic"
                               >
-                                {line.replace(/B-/, "")}
+                                {line.replace(/BB /, "")}
                               </div>
                             );
                           }
@@ -202,13 +202,17 @@ export default function Summary({
           </tbody>
         </table>
         <Divider />
+
         <div className="row">
-          <div className="col  ms-2">
+          <div className="col ms-2  my-2">
             <p>GST IN: 06GQPPS9076B1Z7</p>
             <strong>for KAUSHAL HOMES</strong>
           </div>
           <VR />
-          <div className="col-sm-auto text-center" style={{ width: "280px" }}>
+          <div
+            className="col-sm-auto text-center my-2 me-2"
+            style={{ width: "280px" }}
+          >
             <div className="row">
               <div className="col text-start">
                 <p>Gross Amount </p>
@@ -230,6 +234,7 @@ export default function Summary({
             </div>
           </div>
         </div>
+        <Divider />
       </div>
     </div>
   );
