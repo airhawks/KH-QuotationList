@@ -56,11 +56,9 @@ export default function Editor() {
     }
     const onShowModal = () => {
       setModalShown(true);
-      console.log("showing modal");
     };
     const onHideModal = () => {
       setModalShown(false);
-      console.log("hiding modal");
     };
     myModalEl.addEventListener("show.bs.modal", onShowModal);
     myModalEl.addEventListener("hidden.bs.modal", onHideModal);
