@@ -9,7 +9,7 @@ const COLS = [
   "HSN/SAC",
   "QTY",
   "Rate",
-  "Amount"
+  "Amount",
 ];
 
 const COLS_SIZES = {
@@ -19,7 +19,7 @@ const COLS_SIZES = {
   "HSN/SAC": 1,
   QTY: 0.5,
   Rate: 0.5,
-  Amount: 0.5
+  Amount: 0.5,
 };
 
 const localDataString = window.localStorage.getItem("KH_data");
@@ -43,7 +43,7 @@ export default function Editor() {
       ? setData([
           ...data.slice(0, focussedItem),
           item,
-          ...data.slice(focussedItem + 1)
+          ...data.slice(focussedItem + 1),
         ])
       : setData([...data, item]);
     data.push({});
@@ -96,7 +96,7 @@ export default function Editor() {
             onClick={() => {
               setData([
                 ...data.slice(0, focussedItem),
-                ...data.slice(focussedItem + 1)
+                ...data.slice(focussedItem + 1),
               ]);
               setFocussedItem(null);
             }}
@@ -128,7 +128,7 @@ export default function Editor() {
                 style={{
                   width: `${COLS_SIZES[column] * 10}%`,
                   wordWrap: "break-word",
-                  maxWidth: `${COLS_SIZES[column] * 10}%`
+                  maxWidth: `${COLS_SIZES[column] * 10}%`,
                 }}
               >
                 {column}
@@ -155,19 +155,19 @@ export default function Editor() {
                 <td className="text-start">
                   {description
                     ? description.split("\n").map((line, index) => {
-                        if (line.startsWith("H1-")) {
+                        if (line.startsWith("HH ")) {
                           return (
                             <div className="fw-bold h6" key={index + line}>
-                              {line.replace(/H1-/, "")}
+                              {line.replace(/HH /, "")}
                             </div>
                           );
-                        } else if (line.startsWith("B-")) {
+                        } else if (line.startsWith("BB ")) {
                           return (
                             <div
                               key={index + line}
                               className="fw-semibold fst-italic"
                             >
-                              {line.replace(/B-/, "")}
+                              {line.replace(/BB /, "")}
                             </div>
                           );
                         }
