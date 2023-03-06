@@ -1,14 +1,24 @@
 {
   "files": {
-    "main.css": "/KH-QuotationList/static/css/main.e03661ad.css",
-    "main.js": "/KH-QuotationList/static/js/main.962c5082.js",
-    "static/media/logo.png": "/KH-QuotationList/static/media/logo.a80f59c252cea803634f.png",
+    "main.css": "/KH-QuotationList/static/css/main.604cf43d.chunk.css",
+    "main.js": "/KH-QuotationList/static/js/main.77f2c0ae.chunk.js",
+    "main.js.map": "/KH-QuotationList/static/js/main.77f2c0ae.chunk.js.map",
+    "runtime-main.js": "/KH-QuotationList/static/js/runtime-main.716635c0.js",
+    "runtime-main.js.map": "/KH-QuotationList/static/js/runtime-main.716635c0.js.map",
+    "static/css/2.f26e749f.chunk.css": "/KH-QuotationList/static/css/2.f26e749f.chunk.css",
+    "static/js/2.6f438449.chunk.js": "/KH-QuotationList/static/js/2.6f438449.chunk.js",
+    "static/js/2.6f438449.chunk.js.map": "/KH-QuotationList/static/js/2.6f438449.chunk.js.map",
     "index.html": "/KH-QuotationList/index.html",
-    "main.e03661ad.css.map": "/KH-QuotationList/static/css/main.e03661ad.css.map",
-    "main.962c5082.js.map": "/KH-QuotationList/static/js/main.962c5082.js.map"
+    "static/css/2.f26e749f.chunk.css.map": "/KH-QuotationList/static/css/2.f26e749f.chunk.css.map",
+    "static/css/main.604cf43d.chunk.css.map": "/KH-QuotationList/static/css/main.604cf43d.chunk.css.map",
+    "static/js/2.6f438449.chunk.js.LICENSE.txt": "/KH-QuotationList/static/js/2.6f438449.chunk.js.LICENSE.txt",
+    "static/media/logo.a80f59c2.png": "/KH-QuotationList/static/media/logo.a80f59c2.png"
   },
   "entrypoints": [
-    "static/css/main.e03661ad.css",
-    "static/js/main.962c5082.js"
+    "static/js/runtime-main.716635c0.js",
+    "static/css/2.f26e749f.chunk.css",
+    "static/js/2.6f438449.chunk.js",
+    "static/css/main.604cf43d.chunk.css",
+    "static/js/main.77f2c0ae.chunk.js"
   ]
 }
