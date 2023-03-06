@@ -10,6 +10,13 @@ import "./styles.css";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import {
+  getAuth,
+  signOut,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,9 +32,81 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
+const auth = getAuth();
+
+const loginUser = async (email, password) => {
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      return userCredential.user;
+    })
+    .catch((error) => {
+      console.error(error.message, error);
+    });
+};
+
+const clearStorage = () => {
+  window.localStorage.removeItem("KH_data");
+  window.localStorage.removeItem("KH_ClientDetails");
+  window.location.reload();
+};
+
+const logout = () => {
+  signOut(auth);
+};
 
 function App() {
   const [showSummary, setShowSummary] = React.useState(false);
+  const [user, setUser] = React.useState(null);
+  const [loginDetails, setLoginDetails] = React.useState({});
+
+  const updateLoginDetails = (key, value) => {
+    setLoginDetails({
+      ...loginDetails,
+      [key]: value,
+    });
+  };
+
+  React.useEffect(
+    () =>
+      onAuthStateChanged(auth, (user) => {
+        setUser(user);
+      }),
+    []
+  );
+
+  if (!user) {
+    return (
+      <div className="m-2">
+        <label htmlFor="HSN/SAC" className="mt-3 form-label">
+          Username
+        </label>
+        <input
+          className="form-control"
+          id="HSN/SAC"
+          onChange={(e) => updateLoginDetails("email", e.target.value)}
+        />
+        <label htmlFor="quantity" className="mt-3 form-label">
+          Password
+        </label>
+        <input
+          className="form-control"
+          id="quantity"
+          type="password"
+          onChange={(e) => updateLoginDetails("password", e.target.value)}
+        />
+        <div className="d-grid gap-2 mt-3  d-sm-flex justify-content-sm-start">
+          <button
+            type="button"
+            className="btn btn-primary me-sm-2"
+            onClick={() => loginUser(loginDetails.email, loginDetails.password)}
+          >
+            Login
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return showSummary ? (
     <Summary />
   ) : (
@@ -39,6 +118,21 @@ function App() {
           onClick={setShowSummary}
         >
           Show Receipt
+        </button>
+
+        <button
+          type="button"
+          className="btn btn-primary me-sm-2"
+          onClick={logout}
+        >
+          Logout
+        </button>
+        <button
+          type="button"
+          className="btn btn-primary me-sm-2"
+          onClick={clearStorage}
+        >
+          Clear form
         </button>
       </div>
 
