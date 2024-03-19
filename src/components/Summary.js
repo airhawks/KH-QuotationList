@@ -207,23 +207,21 @@ export default function Summary({
         <div className="row">
           <div className="col ms-2  my-2">
             <strong>Terms and Conditions</strong>
-            <p>
-              <ul>
-                <li>Once goods have been sold, they cannot be returned.</li>
-                <li>
-                  Interest @18% p.a shall be charged on payment after due date.
-                </li>
-                <li>
-                  Payment terms: 50% advance has to be given in advance. Rest of
-                  the 50% before delivery.
-                </li>
-                <li>
-                  Delivery period will be from 30 to 35 days after advance is
-                  received.
-                </li>
-                <li>All disputes are subject to Delhi jurisdiction only.</li>
-              </ul>
-            </p>
+            <ul>
+              <li>Once goods have been sold, they cannot be returned.</li>
+              <li>
+                Interest @18% p.a shall be charged on payment after due date.
+              </li>
+              <li>
+                Payment terms: 50% advance has to be given in advance. Rest of
+                the 50% before delivery.
+              </li>
+              <li>
+                Delivery period will be from 30 to 35 days after advance is
+                received.
+              </li>
+              <li>All disputes are subject to Delhi jurisdiction only.</li>
+            </ul>
           </div>
           <VR />
           <div
