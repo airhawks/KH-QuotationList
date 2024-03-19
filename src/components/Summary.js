@@ -1,4 +1,5 @@
 import logoImage from "../assets/logo.png";
+import LuxuriaLogo from "../assets/LuxuriaLogo.png";
 
 function VR() {
   return (
@@ -28,7 +29,7 @@ const COLS = [
   "Sr. No.",
   "Description",
   "Image",
-  "HSN/SAC",
+  // "HSN/SAC",
   "QTY",
   "Rate",
   "Amount",
@@ -73,30 +74,30 @@ export default function Summary({
         <div className="row">
           <div className="col-4 ">
             <div className="d-flex align-items-center justify-content-center flex-column h-100">
-              <img src={logoImage} className="w-100" alt="" />
+              <img src={LuxuriaLogo} className="w-100" alt="" />
             </div>
           </div>
           <VR />
           <div className="col">
             <strong className="text-center">
-              <p className="h4 fw-semibold">QUOTATION </p>
+              <p className="h3 fw-semibold">QUOTATION </p>
               <p
-                className="h2 fw-bold"
-                style={{
-                  backgroundColor: "#f9a927",
-                  color: "#058492",
-                }}
+                className="h4"
+                // style={{
+                //   backgroundColor: "#f9a927",
+                //   color: "#058492",
+                // }}
               >
-                KAUSHAL HOMES
+                Luxuria By Kaushal Homes
               </p>
-              <p className="h6">SCO-16, 1st Floor, Pocket-B Near HDFC Bank</p>
-              <p className="h6">Sec-14, Hisar Haryana - 125001 </p>{" "}
+              <p className="h6">405 opp. Metro pillar no. 120, MG Road</p>
+              <p className="h6">Ghitorni, Delhi - 110030</p>
               <p className="h6">
                 <a href="mailto:sumit@kaushalhomes.com">
                   sumit@kaushalhomes.com
                 </a>
-                ,{" "}
-                <a href="https://www.kaushalhomes.com/">www.kaushalhomes.com</a>
+                {/* ,{" "}
+                <a href="https://www.kaushalhomes.com/">www.kaushalhomes.com</a> */}
               </p>
               <p className="h6"> Mob. No. +9196371-70000</p>
             </strong>
@@ -192,12 +193,12 @@ export default function Summary({
                   <td>
                     {image ? <img className="w-100" src={image} alt="" /> : ""}
                   </td>
-                  <td>{HSN_SAC}</td>
+                  {/* <td>{HSN_SAC}</td> */}
                   <td>{quantity}</td>
                   <td>{to2DecimalPlaces(rate || 0)}</td>
                   <td>{to2DecimalPlaces((quantity || 0) * (rate || 0))}</td>
                 </tr>
-              )
+              ),
             )}
           </tbody>
         </table>
@@ -205,8 +206,24 @@ export default function Summary({
 
         <div className="row">
           <div className="col ms-2  my-2">
-            <p>GST IN: 06GQPPS9076B1Z7</p>
-            <strong>for KAUSHAL HOMES</strong>
+            <strong>Terms and Conditions</strong>
+            <p>
+              <ul>
+                <li>Once goods have been sold, they cannot be returned.</li>
+                <li>
+                  Interest @18% p.a shall be charged on payment after due date.
+                </li>
+                <li>
+                  Payment terms: 50% advance has to be given in advance. Rest of
+                  the 50% before delivery.
+                </li>
+                <li>
+                  Delivery period will be from 30 to 35 days after advance is
+                  received.
+                </li>
+                <li>All disputes are subject to Delhi jurisdiction only.</li>
+              </ul>
+            </p>
           </div>
           <VR />
           <div
