@@ -1,6 +1,5 @@
 import * as React from "react";
 import ReactDOM from "react-dom/client";
-import * as XLSX from "xlsx";
 import Summary from "./components/Summary.js";
 import Editor from "./components/Editor.js";
 
@@ -154,16 +153,15 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(<App />);
 
 function downloadToExcel() {
-  const localDataString = window.localStorage.getItem("KH_data");
-  const jsonData = JSON.parse(localDataString || "[]");
-  // Convert the JSON data to an array of arrays
-  // const data = jsonData.map((row) => Object.values(row));
-  // Create a new workbook object
-  const worksheet = XLSX.utils.json_to_sheet(jsonData);
-
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Quotation");
-  const excelFile = XLSX.writeFile(workbook, "Quotation.xlsx", {
-    compression: true,
-  });
+  // const localDataString = window.localStorage.getItem("KH_data");
+  // const jsonData = JSON.parse(localDataString || "[]");
+  // // Convert the JSON data to an array of arrays
+  // // const data = jsonData.map((row) => Object.values(row));
+  // // Create a new workbook object
+  // const worksheet = XLSX.utils.json_to_sheet(jsonData);
+  // const workbook = XLSX.utils.book_new();
+  // XLSX.utils.book_append_sheet(workbook, worksheet, "Quotation");
+  // const excelFile = XLSX.writeFile(workbook, "Quotation.xlsx", {
+  //   compression: true,
+  // });
 }
