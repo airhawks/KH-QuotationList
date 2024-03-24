@@ -9,6 +9,8 @@ import "./styles.css";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+
 import {
   getAuth,
   signOut,
@@ -27,10 +29,13 @@ const firebaseConfig = {
   storageBucket: "kh-curtains.appspot.com",
   messagingSenderId: "88547459846",
   appId: "1:88547459846:web:99c15fd9dfa6c44ef19487",
+  databaseURL:
+    "https://kh-curtains-default-rtdb.asia-southeast1.firebasedatabase.app/",
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 const auth = getAuth();
 
 const loginUser = async (email, password) => {

@@ -3,6 +3,17 @@ import * as React from "react";
 const localDataString = window.localStorage.getItem("KH_ClientDetails");
 let localData = JSON.parse(localDataString || "{}");
 
+import { getDatabase, ref, set } from "firebase/database";
+
+function writeUserData(userId, name, email, imageUrl) {
+  const db = getDatabase();
+  set(ref(db, "users/" + userId), {
+    username: name,
+    email: email,
+    profile_picture: imageUrl,
+  });
+}
+
 export default function ClientDetails() {
   const [data, updateData] = React.useState(localData);
   const { name, address, contact, quotationNumber } = data;
@@ -15,7 +26,7 @@ export default function ClientDetails() {
   const onChangeField = (field, value) => {
     const updatedData = {
       ...data,
-      [field]: value
+      [field]: value,
     };
     setData(updatedData);
   };
