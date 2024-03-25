@@ -22,11 +22,16 @@ const COLS_SIZES = {
   Amount: 0.5,
 };
 
-export default function Editor({ initialData, updateData }) {
-  const [data, updateData] = React.useState(initialData);
+export default function Editor({
+  data = [],
+  clientDetails,
+  updateData,
+  updateClientDetails,
+}) {
   const [editingItem, updateEditingItem] = React.useState({});
   const [focussedItem, setFocussedItem] = React.useState(null);
   const [modaShown, setModalShown] = React.useState(false);
+  const [uploading, setUploading] = React.useState(false);
 
   const addItem = () => {
     const item = editingItem;
@@ -61,7 +66,10 @@ export default function Editor({ initialData, updateData }) {
   }, []);
   return (
     <div className="container-fluid ">
-      <ClientDetails />
+      <ClientDetails
+        clientDetails={clientDetails}
+        updateClientDetails={updateClientDetails}
+      />
       <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
         {/* <button
           type="button"
@@ -205,6 +213,7 @@ export default function Editor({ initialData, updateData }) {
                 <FormItem
                   onChange={updateEditingItem}
                   data={focussedItem !== null ? data[focussedItem] : {}}
+                  setUploading={setUploading}
                 />
               ) : null}
             </div>
@@ -213,6 +222,7 @@ export default function Editor({ initialData, updateData }) {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                disabled={uploading}
               >
                 Close
               </button>
@@ -221,6 +231,7 @@ export default function Editor({ initialData, updateData }) {
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
                 onClick={addItem}
+                disabled={uploading}
               >
                 Save
               </button>

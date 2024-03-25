@@ -1,5 +1,5 @@
 import React from "react";
-
+import { logout } from "../firebase";
 export default function HeaderButtons({ showSummary, setShowSummary }) {
   return showSummary ? null : (
     <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">

@@ -20,6 +20,7 @@ const clearStorage = () => {
 function App() {
   const [showSummary, setShowSummary] = React.useState(false);
   const [user, setUser] = React.useState(null);
+  const [isLoaded, setLoaded] = React.useState(false);
   const [loginDetails, setLoginDetails] = React.useState({});
 
   const updateLoginDetails = (key, value) => {
@@ -34,9 +35,13 @@ function App() {
       onAuthStateChanged(auth, (user) => {
         console.log("user", user);
         setUser(user);
+        setLoaded(true);
       }),
     [],
   );
+  if (isLoaded) {
+    // return null;
+  }
 
   if (!user) {
     return (
@@ -71,47 +76,7 @@ function App() {
     );
   }
 
-  return showSummary ? (
-    <Summary />
-  ) : (
-    <>
-      <MyList />
-      <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
-        <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={setShowSummary}
-        >
-          Show Receipt
-        </button>
-
-        {/* <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={downloadToExcel}
-        >
-          Download to Excel
-        </button> */}
-
-        <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={logout}
-        >
-          Logout
-        </button>
-        {/* <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={clearStorage}
-        >
-          Clear form
-        </button> */}
-      </div>
-
-      <Editor />
-    </>
-  );
+  return <MyList />;
 }
 
 const rootElement = document.getElementById("root");

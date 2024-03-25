@@ -14,14 +14,11 @@ function writeUserData(userId, name, email, imageUrl) {
   });
 }
 
-export default function ClientDetails() {
-  const [data, updateData] = React.useState(localData);
+export default function ClientDetails({
+  clientDetails: data = {},
+  updateClientDetails: setData,
+}) {
   const { name, address, contact, quotationNumber } = data;
-
-  const setData = (data) => {
-    window.localStorage.setItem("KH_ClientDetails", JSON.stringify(data));
-    updateData(data);
-  };
 
   const onChangeField = (field, value) => {
     const updatedData = {
