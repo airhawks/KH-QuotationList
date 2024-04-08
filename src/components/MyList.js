@@ -16,6 +16,20 @@ const writeAllQuotations = (data) => {
   window.localStorage.setItem("KH_data", JSON.stringify(data));
 };
 
+const convertToReabableTime = (timestampInSeconds) => {
+  // const timestampInSeconds = unixTimestamp / 1000;
+  const dateObject = new Date(timestampInSeconds);
+  // Format the date and time as "March 25, 2023 at 9:26:20 AM"
+  const options = {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  };
+  return dateObject.toLocaleString("en-IN", options);
+};
+
 const dbRef = ref(database);
 
 const AllQuotations = ({}) => {
@@ -42,12 +56,14 @@ const AllQuotations = ({}) => {
         console.error(error);
         throw error;
       });
-  }, []);
+  }, [selectedKey]);
 
   return selectedKey ? (
     <ItemHome
       itemId={selectedKey}
-      onClickShowList={() => setSelectedKey(null)}
+      onClickShowList={() => {
+        setSelectedKey(null);
+      }}
     />
   ) : (
     <Container className="m-5">
@@ -73,6 +89,7 @@ const AllQuotations = ({}) => {
               (item.quotationNumber || "").includes(searchText) ||
               (item.name || "").includes(searchText),
           )
+          .reverse()
           .map(([index, { name, contact, quotationNumber }]) => {
             console.log(index);
             return (
@@ -80,6 +97,12 @@ const AllQuotations = ({}) => {
                 <div>No. {quotationNumber}</div>
                 <div>Name: {name}</div>
                 <div>Phone Number: {contact}</div>
+                <div>
+                  Created time:{" "}
+                  {convertToReabableTime(listItems[index].createdTimestamp)} |
+                  Updated time:
+                  {convertToReabableTime(listItems[index].updatedTimestamp)}
+                </div>
               </ListGroupItem>
             );
           })}
