@@ -68,7 +68,7 @@ export default function ItemHome({ itemId, onClickShowList }) {
   }
 
   return showSummary ? (
-    <Summary />
+    <Summary clientData={initialData.clientDetails} data={initialData.data} />
   ) : (
     <div class="mt-5">
       <HeaderButtons
