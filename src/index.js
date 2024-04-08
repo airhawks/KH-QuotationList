@@ -33,7 +33,6 @@ function App() {
   React.useEffect(
     () =>
       onAuthStateChanged(auth, (user) => {
-        console.log("user", user);
         setUser(user);
         setLoaded(true);
       }),

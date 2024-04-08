@@ -46,10 +46,7 @@ const AllQuotations = ({}) => {
     get(child(dbRef, `quotations/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
           setListItems(snapshot.val());
-        } else {
-          console.log("No data available");
         }
       })
       .catch((error) => {
@@ -75,7 +72,7 @@ const AllQuotations = ({}) => {
         </Col>
         <Col>
           <Input
-            placeholder="Check it out"
+            placeholder="Search"
             onChange={(e) => setSearchText(e.target.value)}
           />
         </Col>
@@ -91,7 +88,6 @@ const AllQuotations = ({}) => {
           )
           .reverse()
           .map(([index, { name, contact, quotationNumber }]) => {
-            console.log(index);
             return (
               <ListGroupItem key={index} onClick={() => setSelectedKey(index)}>
                 <div>No. {quotationNumber}</div>
