@@ -34,7 +34,6 @@ export default function Editor({
     uploadBytes(storageRef, file, metadata).then(async (snapshot) => {
       const url = await getDownloadURL(snapshot.ref);
       onChangeField("image", url);
-      console.log("Uploaded a", url);
       setUploading(false);
     });
   };
