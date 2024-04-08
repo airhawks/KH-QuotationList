@@ -70,7 +70,7 @@ export default function ItemHome({ itemId, onClickShowList }) {
   return showSummary ? (
     <Summary />
   ) : (
-    <>
+    <div class="mt-5">
       <HeaderButtons
         showSummary={showSummary}
         setShowSummary={setShowSummary}
@@ -83,6 +83,6 @@ export default function ItemHome({ itemId, onClickShowList }) {
         updateData={updateData}
         updateClientDetails={updateClientDetails}
       />
-    </>
+    </div>
   );
 }

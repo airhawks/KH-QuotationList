@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/KH-QuotationList/static/css/main.604cf43d.chunk.css",
-    "main.js": "/KH-QuotationList/static/js/main.c2722d0d.chunk.js",
-    "main.js.map": "/KH-QuotationList/static/js/main.c2722d0d.chunk.js.map",
+    "main.js": "/KH-QuotationList/static/js/main.7d76bc0f.chunk.js",
+    "main.js.map": "/KH-QuotationList/static/js/main.7d76bc0f.chunk.js.map",
     "runtime-main.js": "/KH-QuotationList/static/js/runtime-main.716635c0.js",
     "runtime-main.js.map": "/KH-QuotationList/static/js/runtime-main.716635c0.js.map",
     "static/css/2.95656ca2.chunk.css": "/KH-QuotationList/static/css/2.95656ca2.chunk.css",
-    "static/js/2.234b691d.chunk.js": "/KH-QuotationList/static/js/2.234b691d.chunk.js",
-    "static/js/2.234b691d.chunk.js.map": "/KH-QuotationList/static/js/2.234b691d.chunk.js.map",
+    "static/js/2.52bc474f.chunk.js": "/KH-QuotationList/static/js/2.52bc474f.chunk.js",
+    "static/js/2.52bc474f.chunk.js.map": "/KH-QuotationList/static/js/2.52bc474f.chunk.js.map",
     "index.html": "/KH-QuotationList/index.html",
     "static/css/2.95656ca2.chunk.css.map": "/KH-QuotationList/static/css/2.95656ca2.chunk.css.map",
     "static/css/main.604cf43d.chunk.css.map": "/KH-QuotationList/static/css/main.604cf43d.chunk.css.map",
-    "static/js/2.234b691d.chunk.js.LICENSE.txt": "/KH-QuotationList/static/js/2.234b691d.chunk.js.LICENSE.txt",
+    "static/js/2.52bc474f.chunk.js.LICENSE.txt": "/KH-QuotationList/static/js/2.52bc474f.chunk.js.LICENSE.txt",
     "static/media/LuxuriaLogo.c87bdf60.png": "/KH-QuotationList/static/media/LuxuriaLogo.c87bdf60.png",
     "static/media/logo.a80f59c2.png": "/KH-QuotationList/static/media/logo.a80f59c2.png"
   },
   "entrypoints": [
     "static/js/runtime-main.716635c0.js",
     "static/css/2.95656ca2.chunk.css",
-    "static/js/2.234b691d.chunk.js",
+    "static/js/2.52bc474f.chunk.js",
     "static/css/main.604cf43d.chunk.css",
-    "static/js/main.c2722d0d.chunk.js"
+    "static/js/main.7d76bc0f.chunk.js"
   ]
 }
