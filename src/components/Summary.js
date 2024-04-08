@@ -54,16 +54,10 @@ const to2DecimalPlaces = (numberOrString) => {
 };
 
 export default function Summary({
-  name = "Client Name",
-  quotationNumber = 0,
   quotationDate = new Date(),
+  data,
+  clientData,
 }) {
-  const localDataString = window.localStorage.getItem("KH_data");
-  const data = JSON.parse(localDataString || "[]");
-
-  const localClientDataString = window.localStorage.getItem("KH_ClientDetails");
-  const clientData = JSON.parse(localClientDataString || "{}");
-
   const grossAmount = data.reduce((sum, row) => {
     return sum + (row.rate || 0) * (row.quantity || 0);
   }, 0);
