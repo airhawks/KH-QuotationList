@@ -8,7 +8,10 @@ import _ from "lodash";
 
 function _writeUserData(itemId, data) {
   console.log("writing ", data);
-  set(ref(database, "quotations/" + itemId), data);
+  set(ref(database, "quotations/" + itemId), {
+    ...data,
+    updatedTimestamp: Date.now(),
+  });
 }
 const writeUserData = _.throttle(_writeUserData, 5000);
 
@@ -19,13 +22,10 @@ function readUserData(itemId) {
     .then((snapshot) => {
       if (snapshot.exists()) {
         console.log(snapshot.val());
-        return snapshot.val();
+        return { ...DEFAULT_DATA, ...snapshot.val() };
       } else {
         console.log("No data available");
-        return {
-          data: [],
-          clientDetails: {},
-        };
+        return DEFAULT_DATA;
       }
     })
     .catch((error) => {
@@ -34,15 +34,18 @@ function readUserData(itemId) {
     });
 }
 
+const DEFAULT_DATA = {
+  data: [],
+  clientDetails: {},
+  createdTimestamp: Date.now(),
+};
+
 // const localDataString = window.localStorage.getItem("KH_data");
 // const localClientString = window.localStorage.removeItem("KH_ClientDetails");
 
-export default function ItemHome({ itemId }) {
+export default function ItemHome({ itemId, onClickShowList }) {
   const [showSummary, setShowSummary] = React.useState(false);
-  const [initialData, setInitialData] = React.useState({
-    data: [],
-    clientDetails: {},
-  });
+  const [initialData, setInitialData] = React.useState(DEFAULT_DATA);
   const [isLoading, setIsLoading] = React.useState(true);
   if (isLoading) {
     readUserData(itemId).then((data) => {
@@ -76,6 +79,7 @@ export default function ItemHome({ itemId }) {
       <HeaderButtons
         showSummary={showSummary}
         setShowSummary={setShowSummary}
+        onClickShowList={onClickShowList}
       />
 
       <Editor

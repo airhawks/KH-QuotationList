@@ -1,8 +1,19 @@
 import React from "react";
 import { logout } from "../firebase";
-export default function HeaderButtons({ showSummary, setShowSummary }) {
+export default function HeaderButtons({
+  showSummary,
+  setShowSummary,
+  onClickShowList,
+}) {
   return showSummary ? null : (
     <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
+      <button
+        type="button"
+        className="btn btn-primary me-sm-2"
+        onClick={onClickShowList}
+      >
+        Back
+      </button>
       <button
         type="button"
         className="btn btn-primary me-sm-2"
