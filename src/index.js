@@ -7,41 +7,9 @@ import bootstrap from "bootstrap"; // eslint-disable-line no-unused-vars
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./styles.css";
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  signOut,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyAwKnWWyWHPOYwehaL-paX7KPOLHdomH6s",
-  authDomain: "kh-curtains.firebaseapp.com",
-  projectId: "kh-curtains",
-  storageBucket: "kh-curtains.appspot.com",
-  messagingSenderId: "88547459846",
-  appId: "1:88547459846:web:99c15fd9dfa6c44ef19487",
-};
-
-// Initialize Firebase
-initializeApp(firebaseConfig);
-const auth = getAuth();
-
-const loginUser = async (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      return userCredential.user;
-    })
-    .catch((error) => {
-      console.error(error.message, error);
-    });
-};
+import { auth, loginUser, logout } from "./firebase.js";
+import MyList from "./components/MyList.js";
+import { onAuthStateChanged } from "firebase/auth";
 
 const clearStorage = () => {
   window.localStorage.removeItem("KH_data");
@@ -49,13 +17,10 @@ const clearStorage = () => {
   window.location.reload();
 };
 
-const logout = () => {
-  signOut(auth);
-};
-
 function App() {
   const [showSummary, setShowSummary] = React.useState(false);
   const [user, setUser] = React.useState(null);
+  const [isLoaded, setLoaded] = React.useState(false);
   const [loginDetails, setLoginDetails] = React.useState({});
 
   const updateLoginDetails = (key, value) => {
@@ -68,10 +33,15 @@ function App() {
   React.useEffect(
     () =>
       onAuthStateChanged(auth, (user) => {
+        console.log("user", user);
         setUser(user);
+        setLoaded(true);
       }),
     [],
   );
+  if (isLoaded) {
+    // return null;
+  }
 
   if (!user) {
     return (
@@ -106,62 +76,23 @@ function App() {
     );
   }
 
-  return showSummary ? (
-    <Summary />
-  ) : (
-    <>
-      <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
-        <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={setShowSummary}
-        >
-          Show Receipt
-        </button>
-
-        <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={downloadToExcel}
-        >
-          Download to Excel
-        </button>
-
-        <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={logout}
-        >
-          Logout
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={clearStorage}
-        >
-          Clear form
-        </button>
-      </div>
-
-      <Editor />
-    </>
-  );
+  return <MyList />;
 }
 
 const rootElement = document.getElementById("root");
 const root = ReactDOM.createRoot(rootElement);
 root.render(<App />);
 
-function downloadToExcel() {
-  // const localDataString = window.localStorage.getItem("KH_data");
-  // const jsonData = JSON.parse(localDataString || "[]");
-  // // Convert the JSON data to an array of arrays
-  // // const data = jsonData.map((row) => Object.values(row));
-  // // Create a new workbook object
-  // const worksheet = XLSX.utils.json_to_sheet(jsonData);
-  // const workbook = XLSX.utils.book_new();
-  // XLSX.utils.book_append_sheet(workbook, worksheet, "Quotation");
-  // const excelFile = XLSX.writeFile(workbook, "Quotation.xlsx", {
-  //   compression: true,
-  // });
-}
+// function downloadToExcel() {
+//   const localDataString = window.localStorage.getItem("KH_data");
+//   const jsonData = JSON.parse(localDataString || "[]");
+//   // Convert the JSON data to an array of arrays
+//   // const data = jsonData.map((row) => Object.values(row));
+//   // Create a new workbook object
+//   const worksheet = XLSX.utils.json_to_sheet(jsonData);
+//   const workbook = XLSX.utils.book_new();
+//   XLSX.utils.book_append_sheet(workbook, worksheet, "Quotation");
+//   const excelFile = XLSX.writeFile(workbook, "Quotation.xlsx", {
+//     compression: true,
+//   });
+// }

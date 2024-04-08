@@ -22,30 +22,27 @@ const COLS_SIZES = {
   Amount: 0.5,
 };
 
-const localDataString = window.localStorage.getItem("KH_data");
-let localData = JSON.parse(localDataString || "[]");
-
-export default function Editor() {
-  const [data, updateData] = React.useState(localData);
+export default function Editor({
+  data = [],
+  clientDetails,
+  updateData,
+  updateClientDetails,
+}) {
   const [editingItem, updateEditingItem] = React.useState({});
   const [focussedItem, setFocussedItem] = React.useState(null);
   const [modaShown, setModalShown] = React.useState(false);
-
-  const setData = (data) => {
-    window.localStorage.setItem("KH_data", JSON.stringify(data));
-    updateData(data);
-  };
+  const [uploading, setUploading] = React.useState(false);
 
   const addItem = () => {
     const item = editingItem;
     // setShowModal();
     focussedItem !== null
-      ? setData([
+      ? updateData([
           ...data.slice(0, focussedItem),
           item,
           ...data.slice(focussedItem + 1),
         ])
-      : setData([...data, item]);
+      : updateData([...data, item]);
     data.push({});
   };
 
@@ -69,7 +66,10 @@ export default function Editor() {
   }, []);
   return (
     <div className="container-fluid ">
-      <ClientDetails />
+      <ClientDetails
+        clientDetails={clientDetails}
+        updateClientDetails={updateClientDetails}
+      />
       <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
         {/* <button
           type="button"
@@ -92,7 +92,7 @@ export default function Editor() {
             type="button"
             className="btn btn-primary"
             onClick={() => {
-              setData([
+              updateData([
                 ...data.slice(0, focussedItem),
                 ...data.slice(focussedItem + 1),
               ]);
@@ -138,7 +138,7 @@ export default function Editor() {
           {data.map(
             (
               { description, image, HSN_SAC, quantity, rate, amount },
-              index
+              index,
             ) => (
               <tr
                 className={
@@ -181,7 +181,7 @@ export default function Editor() {
                 <td>{rate || 0}</td>
                 <td>{(quantity || 0) * (rate || 0)}</td>
               </tr>
-            )
+            ),
           )}
         </tbody>
       </table>
@@ -213,6 +213,7 @@ export default function Editor() {
                 <FormItem
                   onChange={updateEditingItem}
                   data={focussedItem !== null ? data[focussedItem] : {}}
+                  setUploading={setUploading}
                 />
               ) : null}
             </div>
@@ -221,6 +222,7 @@ export default function Editor() {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                disabled={uploading}
               >
                 Close
               </button>
@@ -229,6 +231,7 @@ export default function Editor() {
                 className="btn btn-primary"
                 data-bs-dismiss="modal"
                 onClick={addItem}
+                disabled={uploading}
               >
                 Save
               </button>

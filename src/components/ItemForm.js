@@ -1,7 +1,11 @@
 import * as React from "react";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export default function Editor({ data = {}, onChange = () => {} }) {
+export default function Editor({
+  data = {},
+  onChange = () => {},
+  setUploading,
+}) {
   const [formData, setData] = React.useState(data);
   const { description, image, HSN_SAC, quantity, rate } = formData;
 
@@ -26,10 +30,12 @@ export default function Editor({ data = {}, onChange = () => {} }) {
 
     const storage = getStorage();
     const storageRef = ref(storage, name);
+    setUploading(true);
     uploadBytes(storageRef, file, metadata).then(async (snapshot) => {
       const url = await getDownloadURL(snapshot.ref);
       onChangeField("image", url);
       console.log("Uploaded a", url);
+      setUploading(false);
     });
   };
   return (
