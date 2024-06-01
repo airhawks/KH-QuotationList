@@ -4,17 +4,6 @@ import { ref, child, get, push } from "firebase/database";
 import { Button, Input, Row, Col } from "reactstrap";
 import { database } from "../firebase";
 import ItemHome from "./ItemHome";
-import ClientDetails from "./ClientDetails";
-
-const readAllQuotations = () => {
-  const localDataString = window.localStorage.getItem("KH_data");
-  const jsonData = JSON.parse(localDataString || "[]");
-  return jsonData;
-};
-
-const writeAllQuotations = (data) => {
-  window.localStorage.setItem("KH_data", JSON.stringify(data));
-};
 
 const convertToReabableTime = (timestampInSeconds) => {
   // const timestampInSeconds = unixTimestamp / 1000;

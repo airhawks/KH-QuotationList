@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderButtons from "./HeaderButtons";
-import { getDatabase, ref, child, set, get } from "firebase/database";
+import { getDatabase, ref, child, set, get, push } from "firebase/database";
 import { database } from "../firebase";
 import Editor from "./Editor";
 import Summary from "./Summary";
@@ -14,6 +14,21 @@ function _writeUserData(itemId, data) {
   });
 }
 const writeUserData = _.throttle(_writeUserData, 5000);
+
+const copyQuotation = (itemKey) => {
+  const postListRef = ref(database, "quotations/");
+  const newKey = push(postListRef).key;
+  readUserData(itemKey).then((data) => {
+    const newData = {
+      ...data,
+      clientDetails: {
+        ...data.clientDetails,
+        quotationNumber: data.clientDetails.quotationNumber + " - Copy",
+      },
+    };
+    return writeUserData(newKey, newData);
+  });
+};
 
 function readUserData(itemId) {
   const dbRef = ref(database);
@@ -70,11 +85,12 @@ export default function ItemHome({ itemId, onClickShowList }) {
   return showSummary ? (
     <Summary clientData={initialData.clientDetails} data={initialData.data} />
   ) : (
-    <div class="mt-5">
+    <div className="mt-5">
       <HeaderButtons
         showSummary={showSummary}
         setShowSummary={setShowSummary}
         onClickShowList={onClickShowList}
+        copyQuotation={() => copyQuotation(itemId)}
       />
 
       <Editor
