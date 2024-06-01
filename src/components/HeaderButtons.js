@@ -4,9 +4,10 @@ export default function HeaderButtons({
   showSummary,
   setShowSummary,
   onClickShowList,
+  copyQuotation,
 }) {
   return showSummary ? null : (
-    <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
+    <div className="d-grid gap-2 m-2 d-sm-flex ">
       <button
         type="button"
         className="btn btn-primary me-sm-2"
@@ -22,6 +23,13 @@ export default function HeaderButtons({
         Show Receipt
       </button>
 
+      <button
+        type="button"
+        className="btn btn-primary me-sm-2"
+        onClick={copyQuotation}
+      >
+        Copy Quotation
+      </button>
       {/* <button
         type="button"
         className="btn btn-primary me-sm-2"
