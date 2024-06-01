@@ -44,7 +44,10 @@ export default function Editor({
         ])
       : updateData([...data, item]);
     data.push({});
+    // console.log("additem", data);
   };
+
+  // console.log("editor render", data);
 
   React.useEffect(() => {
     const myModalEl = document.getElementById("exampleModal");
@@ -64,6 +67,7 @@ export default function Editor({
       myModalEl.removeEventListener("hidden.bs.modal", onHideModal);
     };
   }, []);
+
   return (
     <div className="container-fluid ">
       <ClientDetails
@@ -71,11 +75,6 @@ export default function Editor({
         updateClientDetails={updateClientDetails}
       />
       <div className="d-grid gap-2 m-2 d-sm-flex justify-content-sm-end">
-        {/* <button
-          type="button"
-          className="btn btn-primary me-sm-2"
-          onClick={addItem}
-        ></button> */}
         {focussedItem !== null ? (
           <button
             type="button"

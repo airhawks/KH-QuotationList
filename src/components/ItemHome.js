@@ -43,6 +43,13 @@ function readUserData(itemId) {
         return DEFAULT_DATA;
       }
     })
+    .then((data) => {
+      return {
+        ...data,
+        // convert undefined items to empty Objects
+        data: ([...data.data] || []).map((item) => item || {}),
+      };
+    })
     .catch((error) => {
       console.error(error);
       throw error;
@@ -70,6 +77,7 @@ export default function ItemHome({ itemId, onClickShowList }) {
   }
 
   const updateData = (data) => {
+    // console.log("updating ", data);
     setInitialData({ ...initialData, data });
     writeUserData(itemId, { ...initialData, data });
   };
