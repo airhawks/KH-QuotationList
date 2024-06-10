@@ -113,7 +113,12 @@ export default function Editor({
       </div>
       <table
         className="table table-dark table-striped"
-        style={{ width: "100%" }}
+        style={{
+          width: "100%",
+          display: "block",
+          height: "50vh",
+          overflow: "auto",
+        }}
       >
         <thead>
           <tr>
@@ -126,6 +131,8 @@ export default function Editor({
                   width: `${COLS_SIZES[column] * 10}%`,
                   wordWrap: "break-word",
                   maxWidth: `${COLS_SIZES[column] * 10}%`,
+                  position: "sticky",
+                  top: 0,
                 }}
               >
                 {column}
